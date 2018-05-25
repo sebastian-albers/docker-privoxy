@@ -1,0 +1,17 @@
+sudo: required
+services:
+- docker
+language: bash
+script:
+# prepare qemu
+- docker run --rm --privileged multiarch/qemu-user-static:register --reset
+# build image
+- docker build -t sebastianalbers/privoxy-raspbian .
+# test image
+- docker run sebastianalbers/privoxy-raspbian /usr/sbin/privoxy --version
+# push image
+- >
+  if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+    docker push sebastianalbers/privoxy-raspbian
+  fi
