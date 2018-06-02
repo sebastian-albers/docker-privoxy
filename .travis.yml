@@ -15,4 +15,3 @@ after_success:
   if [ "$TRAVIS_BRANCH" == "master" ]; then
     curl --data build=true -X POST "$DOCKER_HUB_TRIGGER_URL"
   fi
-

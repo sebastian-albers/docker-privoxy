@@ -1,13 +1,13 @@
-FROM resin/rpi-raspbian
+FROM alpine
 
 EXPOSE 8118
 
-RUN apt-get update && \
-    apt-get install privoxy && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+RUN apk --no-cache --update add privoxy && \
+    sed -i'' 's/127\.0\.0\.1:8118/0\.0\.0\.0:8118/' /etc/privoxy/config && \
+    sed -i'' 's/#debug  4096/debug  4096/' /etc/privoxy/config && \
+    echo "forward-socks5 / tor:9050 ." >> /etc/privoxy/config
 
-COPY config /etc/privoxy/config
+RUN chown privoxy.privoxy /etc/privoxy/*
 
-CMD ["/usr/sbin/privoxy", "--no-daemon", "/etc/privoxy/config"]
-
+ENTRYPOINT ["/usr/sbin/privoxy"]
+CMD ["--no-daemon", "--user", "privoxy", "/etc/privoxy/config"]
