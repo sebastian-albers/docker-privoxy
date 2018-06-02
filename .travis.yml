@@ -8,7 +8,7 @@ script:
 # build image
 - docker build -t sebastianalbers/rpi-privoxy .
 # test image
-- docker run sebastianalbers/rpi-privoxy /usr/sbin/privoxy --version
+- docker run sebastianalbers/rpi-privoxy --version
 after_success:
 # notify Docker Hub to make a new build
 - >
