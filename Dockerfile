@@ -1,4 +1,4 @@
-FROM alpine
+FROM resin/armhf-alpine
 
 EXPOSE 8118
 
