@@ -10,8 +10,11 @@ script:
 # test image
 - docker run sebastianalbers/rpi-privoxy --version
 after_success:
-# notify Docker Hub to make a new build
-- >
-  if [ "$TRAVIS_BRANCH" == "master" ]; then
-    curl -X POST "$DOCKER_HUB_TRIGGER_URL"
-  fi
+# trigger latest build on Docker Hub
+- curl -X POST "$DOCKER_HUB_TRIGGER_URL"
+# tag Docker image with version and push to Docker Hub
+- privoxy_version=$(docker run sebastianalbers/rpi-privoxy --version |
+    sed 's/^Privoxy version \([0-9\.]*\) .*$/\1/')
+- docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+- docker tag "sebastianalbers/rpi-privoxy:latest" "sebastianalbers/rpi-privoxy:${privoxy_version}"
+- docker push "sebastianalbers/rpi-privoxy:${privoxy_version}"
