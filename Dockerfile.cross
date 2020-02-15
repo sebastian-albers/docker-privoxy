@@ -1,0 +1,25 @@
+__CROSS_FROM alpine AS builder
+__CROSS_
+__CROSS_# download QEMU
+__CROSS_ENV QEMU_URL https://github.com/multiarch/qemu-user-static/releases/download/v4.2.0-4/x86_64_qemu-__QEMU_ARCH__-static.tar.gz
+__CROSS_RUN apk add curl && curl -L ${QEMU_URL} | tar zxvf -
+__CROSS_
+FROM __BASEIMAGE_ARCH__/alpine
+__CROSS_
+__CROSS_# Add QEMU
+__CROSS_COPY --from=builder qemu-__QEMU_ARCH__-static /usr/bin
+
+EXPOSE 8118
+
+RUN apk --no-cache --update add privoxy && \
+    sed -i'' 's/127\.0\.0\.1:8118/0\.0\.0\.0:8118/' /etc/privoxy/config && \
+    sed -i'' 's/#debug     1/debug     1/' /etc/privoxy/config && \
+    sed -i'' 's/#debug  1024/debug  1024/' /etc/privoxy/config && \
+    sed -i'' 's/#debug  4096/debug  4096/' /etc/privoxy/config && \
+    sed -i'' 's/#debug  8192/debug  8192/' /etc/privoxy/config && \
+    echo "forward-socks5 / tor:9050 ." >> /etc/privoxy/config
+
+RUN chown privoxy.privoxy /etc/privoxy/*
+
+ENTRYPOINT ["/usr/sbin/privoxy"]
+CMD ["--no-daemon", "--user", "privoxy", "/etc/privoxy/config"]
