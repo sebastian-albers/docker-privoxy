@@ -1,4 +1,5 @@
-image: sebastianalbers/privoxy:__TAG__
+image: sebastianalbers/privoxy:latest
+tags: [__TAGS__]
 manifests:
   - image: sebastianalbers/privoxy:latest-amd64
     platform:
