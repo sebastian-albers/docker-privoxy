@@ -1,7 +1,7 @@
 # Privoxy
 
 [![Build Status](https://travis-ci.com/salbers/docker-privoxy.svg?token=4By62F4TaqJz29wWsCz2&branch=master)](https://travis-ci.com/bitbucket/salbers/docker-privoxy)
-![Docker Build Status](https://img.shields.io/docker/cloud/build/sebastianalbers/privoxy.svg)
+[![Docker Build Status](https://img.shields.io/docker/cloud/build/sebastianalbers/privoxy.svg)](https://hub.docker.com/r/sebastianalbers/privoxy/builds)
 ![Docker Automated build](https://img.shields.io/docker/cloud/automated/sebastianalbers/privoxy.svg)
 ![Docker Pulls](https://img.shields.io/docker/pulls/sebastianalbers/privoxy.svg)
 ![Docker Stars](https://img.shields.io/docker/stars/sebastianalbers/privoxy.svg)
