@@ -1,0 +1,9 @@
+confdir /etc/privoxy
+logdir /var/log/privoxy
+logfile privoxy.log
+debug     1 # Log the destination for each request.
+debug  1024 # Log the destination for requests Privoxy didn't let through, and the reason why.
+debug  4096 # Startup banner and warnings
+debug  8192 # Non-fatal errors
+listen-address  0.0.0.0:8118
+forward-socks5 / tor:9050 .
