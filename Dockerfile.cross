@@ -11,7 +11,7 @@ __CROSS_COPY --from=builder qemu-__QEMU_ARCH__-static /usr/bin
 
 EXPOSE 8118
 
-RUN apk --no-cache --update add privoxy
+RUN apk --no-cache --update add privoxy curl
 COPY config /etc/privoxy/config
 
 RUN chown privoxy.privoxy /etc/privoxy/*
