@@ -1,6 +1,6 @@
 # Privoxy
 
-[![Build Status](https://github.com/sebastian-albers/docker-privoxy/actions/workflows/main.yml/badge.svg)](https://github.com/sebastian-albers/docker-privoxy/actions/workflows/main.yml)
+[![Build Status](https://github.com/sebastian-albers/docker-privoxy/actions/workflows/latest-release.yml/badge.svg)](https://github.com/sebastian-albers/docker-privoxy/actions/workflows/latest-release.yml)
 ![Docker Pulls](https://img.shields.io/docker/pulls/sebastianalbers/privoxy.svg)
 ![Docker Stars](https://img.shields.io/docker/stars/sebastianalbers/privoxy.svg)
 
